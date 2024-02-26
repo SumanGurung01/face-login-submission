@@ -8,6 +8,7 @@ function Home() {
   const { login } = useContext(Context);
 
   useEffect(() => {
+    // check if login is true, if false then redirect to login page
     if (!login) navigate("/");
   });
 
