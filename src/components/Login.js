@@ -15,6 +15,8 @@ function Login() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    
+    // function to access the webcam of the device and display content in video tag 
     function accessVideo() {
       navigator.getUserMedia(
         { video: {} },
@@ -26,23 +28,27 @@ function Login() {
       );
     }
 
+    // load the face detection model from face-api.js
     Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri("/models")])
       .then(() => {
         console.log("Accessed Video Camera");
         accessVideo();
       })
       .catch((err) => console.log(err));
-
+    
     setLogin(false);
   }, []);
 
   async function checkFace() {
+
+    // use face-api.js to detect faces in the video
     console.log("Detecting faces ...");
     const detection = await faceapi.detectAllFaces(
       videoRef.current,
       new faceapi.TinyFaceDetectorOptions(),
     );
 
+    // if face is detected then detection.length > 0 
     if (detection.length > 0) {
       setLogin(true);
       navigate("/home");
