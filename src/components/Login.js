@@ -48,8 +48,10 @@ function Login() {
       new faceapi.TinyFaceDetectorOptions(),
     );
 
-    // if face is detected then detection.length > 0 
-    if (detection.length > 0) {
+    
+    // if detection.length > 0, means face is detected 
+    // if face is detected then set login as true and navigate to home page.
+    if (detection.length > 0) {  
       setLogin(true);
       navigate("/home");
     } else {
